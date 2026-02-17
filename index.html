@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jacksonville | Premium Food Delivery</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-dim: #b59226;
+            --black: #0a0a0a;
+            --dark-gray: #1c1c1c;
+            --glass: rgba(20, 20, 20, 0.85);
+            --border: 1px solid rgba(212, 175, 55, 0.2);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--black);
+            color: var(--text-main);
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('https://images.unsplash.com/photo-1571805529673-0f56b922cd14?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; margin: 0; }
+        
+        .text-gold { color: var(--gold); }
+        .text-center { text-align: center; }
+
+        /* HEADER */
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-top: 20px;
+        }
+
+        .brand-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--gold), #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .location-tag {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .info-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge-pill {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ACTION GRID */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            background: var(--glass);
+            border: var(--border);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn i { font-size: 1.2rem; color: var(--gold); }
+        .action-btn span { font-size: 0.85rem; font-weight: 500; }
+        .action-btn:active { transform: scale(0.98); background: rgba(212, 175, 55, 0.1); }
+        .action-btn.primary { background: var(--gold); border: none; }
+        .action-btn.primary span, .action-btn.primary i { color: var(--black); font-weight: 700; }
+
+        /* MENU */
+        .menu-card {
+            background: var(--glass);
+            border: var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        /* Item Toggle */
+        .item-selector {
+            display: flex;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .item-btn {
+            flex: 1;
+            padding: 12px 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .item-btn .meal-emoji {
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .item-btn.active {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Size Grid */
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .size-option {
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 5px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .size-option.selected {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        .size-option.popular::before {
+            content: "★ POPULAR";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .size-name { display: block; font-size: 0.85rem; margin-bottom: 4px; }
+        .size-price { display: block; font-size: 1rem; font-weight: 700; color: var(--gold); }
+
+        /* Controls */
+        .controls-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .qty-wrapper {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background: var(--gold);
+            color: var(--black);
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .qty-display {
+            width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        textarea, input[type="text"], input[type="tel"] {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        textarea { resize: none; }
+        
+        textarea:focus, input[type="text"]:focus, input[type="tel"]:focus {
+            border-color: var(--gold);
+        }
+
+        input[type="text"]::placeholder, input[type="tel"]::placeholder, textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Customer Info */
+        .customer-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .field-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .field-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Order Info Block */
+        .order-info {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Sticky Footer */
+        .checkout-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #121212;
+            padding: 15px 20px;
+            border-top: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
+        }
+
+        .total-display {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .total-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+        .total-amount { font-size: 1.4rem; font-weight: 700; color: var(--gold); }
+
+        .checkout-btn {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        /* Meal display badge */
+        .meal-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+        }
+
+        .meal-display .emoji-big { font-size: 2rem; }
+        .meal-display .meal-title { font-size: 0.95rem; font-weight: 600; color: var(--gold); }
+        .meal-display .meal-sub { font-size: 0.75rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <header>
+        <div class="brand-name">Jacksonville</div>
+        <div class="location-tag">
+            <i class="fas fa-map-marker-alt text-gold"></i> Kotei, Kumasi
+        </div>
+        <div class="info-badges">
+            <div class="badge-pill"><i class="fas fa-clock text-gold"></i> 20-25 Mins</div>
+            <div class="badge-pill"><i class="fas fa-wifi text-gold"></i> Free WiFi</div>
+        </div>
+    </header>
+
+    <nav class="action-grid">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=6.660786,-1.560252" target="_blank" class="action-btn">
+            <i class="fas fa-location-arrow"></i>
+            <span>Directions</span>
+        </a>
+        <a href="tel:+233595173261" class="action-btn">
+            <i class="fas fa-phone-alt"></i>
+            <span>Call Now</span>
+        </a>
+        <a href="#order-menu" class="action-btn primary" onclick="document.getElementById('order-menu').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-utensils"></i>
+            <span>Order Now</span>
+        </a>
+        <a href="https://www.google.com/maps/search/?api=1&query=6.660786,-1.560252" target="_blank" class="action-btn">
+            <i class="fas fa-star"></i>
+            <span>Review</span>
+        </a>
+    </nav>
+
+    <main id="order-menu">
+        <div class="menu-card">
+            <div class="section-title">Select Meal</div>
+
+            <div class="item-selector">
+                <button class="item-btn active" onclick="setMeal('fried-rice', this)">
+                    <span class="meal-emoji">🍛🍗</span> Fried Rice
+                </button>
+                <button class="item-btn" onclick="setMeal('noodles', this)">
+                    <span class="meal-emoji">🍜</span> Noodles
+                </button>
+            </div>
+
+            <!-- Meal Display Badge -->
+            <div class="meal-display" id="meal-display">
+                <span class="emoji-big" id="meal-emoji">🍛🍗</span>
+                <div>
+                    <div class="meal-title" id="meal-title">Fried Rice with Chicken</div>
+                    <div class="meal-sub">Select your preferred size below</div>
+                </div>
+            </div>
+
+            <div class="section-title">Select Size</div>
+            
+            <div id="size-container" class="size-grid"></div>
+
+            <!-- Customer Info -->
+            <div class="section-title">Your Details</div>
+            <div class="customer-fields">
+                <div class="field-wrap">
+                    <label class="field-label">Your Name</label>
+                    <input type="text" id="customer-name" placeholder="e.g. Kwame">
+                </div>
+                <div class="field-wrap">
+                    <label class="field-label">Phone Number</label>
+                    <input type="tel" id="customer-phone" placeholder="e.g. 0551234567">
+                </div>
+            </div>
+
+            <div class="section-title">Preferences</div>
+            <div class="controls-row">
+                <div class="qty-wrapper">
+                    <button class="qty-btn" onclick="updateQty(-1)">−</button>
+                    <span id="qty-display" class="qty-display">1</span>
+                    <button class="qty-btn" onclick="updateQty(1)">+</button>
+                </div>
+                <textarea id="customer-note" rows="1" placeholder="Notes (e.g., No ketchup, extra spicy)"></textarea>
+            </div>
+
+            <div class="order-info">
+                <span><i class="fas fa-shopping-bag"></i> Pickup</span>
+                <span><i class="fas fa-money-bill-wave"></i> Pay on Pickup</span>
+            </div>
+        </div>
+    </main>
+
+    <div style="height: 60px;"></div>
+</div>
+
+<div class="checkout-bar">
+    <div class="total-display">
+        <span class="total-label">Total Estimate</span>
+        <span class="total-amount" id="total-price">0 GHS</span>
+    </div>
+    <button class="checkout-btn" onclick="submitOrder()">
+        <i class="fab fa-whatsapp"></i> Order
+    </button>
+</div>
+
+<script>
+    const menuData = {
+        'fried-rice': {
+            name: "Fried Rice with Chicken",
+            emoji: "🍛🍗",
+            sizes: [
+                { id: 's',  name: 'Small',     price: 25 },
+                { id: 'm',  name: 'Medium',    price: 30 },
+                { id: 'l',  name: 'Large',     price: 35, popular: true },
+                { id: 'xl', name: 'XL',        price: 40 },
+                { id: 'j',  name: 'Jumbo',     price: 45 },
+                { id: 'p1', name: 'Party (S)', price: 55 },
+                { id: 'p2', name: 'Party (M)', price: 65 },
+                { id: 'p3', name: 'Party (L)', price: 75 },
+            ]
+        },
+        'noodles': {
+            name: "Assorted Noodles",
+            emoji: "🍜",
+            sizes: [
+                { id: 's',  name: 'Small',  price: 25 },
+                { id: 'm',  name: 'Medium', price: 30, popular: true },
+                { id: 'l',  name: 'Large',  price: 40 },
+                { id: 'xl', name: 'XL',     price: 45 },
+                { id: 'j',  name: 'Jumbo',  price: 50 },
+            ]
+        }
+    };
+
+    let currentMeal = 'fried-rice';
+    let currentSizeIndex = 2; // default Large
+    let quantity = 1;
+
+    function init() {
+        renderSizes();
+        updateTotal();
+    }
+
+    function setMeal(mealKey, btnEl) {
+        currentMeal = mealKey;
+        quantity = 1;
+        document.getElementById('qty-display').innerText = quantity;
+
+        document.querySelectorAll('.item-btn').forEach(b => b.classList.remove('active'));
+        btnEl.classList.add('active');
+
+        // Update meal display badge
+        const meal = menuData[mealKey];
+        document.getElementById('meal-emoji').innerText = meal.emoji;
+        document.getElementById('meal-title').innerText = meal.name;
+
+        const sizes = menuData[mealKey].sizes;
+        const popularIndex = sizes.findIndex(s => s.popular);
+        currentSizeIndex = popularIndex > -1 ? popularIndex : 0;
+
+        renderSizes();
+        updateTotal();
+    }
+
+    function renderSizes() {
+        const container = document.getElementById('size-container');
+        container.innerHTML = '';
+        const sizes = menuData[currentMeal].sizes;
+
+        sizes.forEach((size, index) => {
+            const div = document.createElement('div');
+            div.className = `size-option ${index === currentSizeIndex ? 'selected' : ''} ${size.popular ? 'popular' : ''}`;
+            div.onclick = () => selectSize(index);
+            div.innerHTML = `
+                <span class="size-name">${size.name}</span>
+                <span class="size-price">${size.price} GHS</span>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    function selectSize(index) {
+        currentSizeIndex = index;
+        renderSizes();
+        updateTotal();
+    }
+
+    function updateQty(change) {
+        if (quantity + change >= 1) {
+            quantity += change;
+            document.getElementById('qty-display').innerText = quantity;
+            updateTotal();
+        }
+    }
+
+    function updateTotal() {
+        const price = menuData[currentMeal].sizes[currentSizeIndex].price;
+        document.getElementById('total-price').innerText = `${price * quantity} GHS`;
+    }
+
+    function submitOrder() {
+        const meal = menuData[currentMeal];
+        const size = meal.sizes[currentSizeIndex];
+        const total = size.price * quantity;
+        const note = document.getElementById('customer-note').value.trim();
+        const customerName = document.getElementById('customer-name').value.trim();
+        const customerPhone = document.getElementById('customer-phone').value.trim();
+
+        const orderID = `#JV${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+        let message = `${meal.emoji} *NEW ORDER – JACKSONVILLE*`;
+        message += `\n━━━━━━━━━━━━━━━━━━`;
+        message += `\n🆔 Order ID: ${orderID}`;
+        message += `\n📅 Date: ${dateStr} at ${timeStr}`;
+        message += `\n⏱ Ready in: 20–25 mins`;
+
+        if (customerName || customerPhone) {
+            message += `\n`;
+            message += `\n👤 Customer Info:`;
+            if (customerName)  message += `\n   Name: ${customerName}`;
+            if (customerPhone) message += `\n   Phone: ${customerPhone}`;
+        }
+
+        message += `\n`;
+        message += `\n${meal.emoji} Item: ${meal.name}`;
+        message += `\n📏 Size: ${size.name}`;
+        message += `\n📦 Quantity: ${quantity}`;
+        message += `\n💰 Unit Price: ${size.price} GHS`;
+        message += `\n💵 Subtotal: ${total} GHS`;
+        message += `\n`;
+        message += `\n📍 Order Type: Pickup`;
+        message += `\n💳 Payment: Pay on Pickup`;
+
+        if (note !== "") {
+            message += `\n`;
+            message += `\n📝 Customer Note:`;
+            message += `\n${note}`;
+        }
+
+        message += `\n`;
+        message += `\n━━━━━━━━━━━━━━━━━━`;
+        message += `\n💰 *TOTAL: ${total} GHS*`;
+        message += `\n━━━━━━━━━━━━━━━━━━`;
+        message += `\n\nThank you for choosing JACKSONVILLE 🙌`;
+
+        const phone = "233595173261";
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    init();
+</script>
+</body>
+</html>
